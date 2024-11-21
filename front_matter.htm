@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<!-- /*This is the template for the generated front matter. Any changes made here will be reflected in the generated front matter.*/ -->
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<style>
+        @page {
+            size: 7in 10in;
+            margin: 0;
+        }
+
+        html,
+        body,
+        div,
+        header,
+        p,
+        blockquote,
+        ul,
+        ol,
+        li,
+        pre {
+            margin: 0;
+            padding: 0;
+            hyphens: none;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        /* the first page (DIVs like outside cover, more or less) */
+
+        #contributorList {
+            position: absolute;
+            left: 3.5in;
+            top: 0.6in;
+            padding-top: 0.7in;
+            padding-left: 3em;
+            padding-right: 3em;
+            padding-bottom: 500pt;
+            color: black;
+            font-family: 'Muli SemiBold', sans-serif;
+            font-size: 10pt;
+            line-height: 18pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: uppercase;
+            z-index: 1;
+        }
+
+        #imaginations-logo {
+            position: absolute;
+            left: 56px;
+            top: 7.2in;
+            background-color: white;
+            z-index: 2;
+        }
+
+        #issue-title {
+            position: absolute;
+            left: 56px;
+            top: 8.3in;
+            font-family: 'Muli ExtraBold', sans-serif;
+            color: gray;
+            font-size: 18pt;
+            line-height: 21pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        #issue-editor {
+            position: absolute;
+            left: 56px;
+            top: 9.5in;
+            font-family: "Muli", sans-serif;
+            font-size: 12pt;
+            font-style: italic;
+            color: #807c7e;
+            z-index: 3;
+        }
+
+        #issue {
+            position: absolute;
+            left: 5.2in;
+            top: 9.5in;
+            font-family: 'Muli', sans-serif;
+            font-size: 10pt;
+            font-style: italic;
+            color: grey;
+            break-after: page;
+        }
+
+        /* the second page */
+        #issue-title-top {
+            position: absolute;
+            left: 1.3in;
+            top: 0.6in;
+            padding-right: 0.4in;
+            font-family: 'Muli';
+            color: rgb(241, 88, 68);
+            font-size: 14pt;
+            line-height: 18pt;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        #issue-top {
+            position: absolute;
+            left: 5.2in;
+            top: 0.4in;
+            font-family: 'Muli', sans-serif;
+            font-size: 10pt;
+            font-style: italic;
+            color: gray;
+        }
+
+        #guest-editor {
+            position: absolute;
+            left: 1.3in;
+            top: 1.4in;
+            font-family: 'Muli', sans-serif;
+            font-size: 12pt;
+            color: gray;
+        }
+
+        #team {
+            position: absolute;
+            right: 0in;
+            top: 1.6in;
+            padding-right: 0.9in;
+            font-family: 'Muli Light', sans-serif;
+            color: gray;
+            font-size: 8pt;
+            line-height: 10.5pt;
+            font-style: italic;
+            text-align: right;
+            text-transform: none;
+        }
+
+        #csi-logo {
+            position: absolute;
+            left: 1.3in;
+            top: 8.5in;
+            background-color: white;
+            z-index: 2;
+        }
+
+        #sshrc-logo {
+            position: absolute;
+            left: 1.3in;
+            top: 9.1in;
+            background-color: white;
+            z-index: 2;
+        }
+
+        #doi {
+            display: none;
+            position: absolute;
+            left: 3.8in;
+            top: 8.8in;
+            font-family: 'Muli Light', sans-serif;
+            color: gray;
+            font-size: 8pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        #financial-support {
+            position: absolute;
+            left: 1.3in;
+            top: 9.4in;
+            padding-right: 0.9in;
+            font-family: 'Muli Light', sans-serif;
+            color: gray;
+            font-size: 8pt;
+            line-height: 10pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: none;
+            break-after: page;
+        }
+
+        /* the TOC page */
+        #table-of-contents {
+            page-break-before: always;
+            position: absolute;
+            left: 1.3in;
+            top: 1in;
+            padding-right: 0.6in;
+            font-family: 'Muli Light', sans-serif;
+            color: gray;
+            font-size: 9pt;
+            line-height: 11pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: none;
+        }
+
+        #image-credit {
+            position: absolute;
+            border-style: solid;
+            border-width: 0.5px 0 0 0;
+            border-color: gray;
+            left: 0;
+            padding-top: 0.1in;
+            padding-left: 1.3in;
+            margin-right: 0.9in;
+            top: 9.3in;
+            font-family: 'Muli SemiBold', sans-serif;
+            color: gray;
+            font-size: 8pt;
+            line-height: 11pt;
+            text-align: left;
+        }
+
+        /* classes for formatting */
+        h2 {
+            font-family: 'Muli SemiBold', sans-serif;
+            font-style: normal;
+            color: black;
+            font-size: 9pt;
+            line-height: 10pt;
+            text-align: left;
+        }
+
+        .team-heading {
+            margin-top: 0.0625in;
+            font-family: 'Muli', sans-serif;
+            color: gray;
+            font-size: 9pt;
+        }
+
+        .Credits-Red-Name {
+            color: rgb(241, 88, 68);
+        }
+
+        .toc-heading {
+            margin-bottom: 0.3in;
+            font-family: 'Muli SemiBold', sans-serif;
+            font-style: normal;
+            color: black;
+            font-size: 9pt;
+            line-height: 11pt;
+            text-align: left;
+        }
+
+        .toc-sub-heading {
+            margin-top: 11pt;
+            margin-bottom: 0;
+            font-family: 'Muli SemiBold', sans-serif;
+            font-style: normal;
+            color: black;
+            font-size: 9pt;
+            line-height: 11pt;
+            text-align: left;
+        }
+
+        .toc-title {
+            margin-top: 0.1in;
+            color: rgb(241, 88, 68);
+        }
+
+        .toc-title a {
+            font-family: 'Muli Light', sans-serif;
+            font-size: 9pt;
+            line-height: 11pt;
+            color: rgb(241, 88, 68);
+            font-style: italic;
+            text-align: left;
+            text-decoration: none;
+            text-transform: none;
+        }
+
+        .toc-author {
+            padding-left: 0.125in;
+        }
+
+        .page-number {
+            color: gray;
+        }
+
+        .toc-anchor a {
+            color: gray;
+            text-decoration-line: underline !important;
+            text-decoration-style: dotted !important;
+        }
+
+        .acknowledgements h1 {
+            page-break-before: always;
+            hyphens: none;
+            -epub-hyphens: none;
+            -webkit-column-span: all;
+            /* Chrome, Safari, Opera */
+            column-span: all;
+            color: #e9362c;
+            padding-top: 1.5in;
+            font-family: "Muli SemiBold", sans-serif;
+            font-size: 12.5px;
+            font-weight: 500;
+            line-height: 19pt;
+            margin-bottom: 6px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .acknowledgements p {
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+            margin-left: 1.5in;
+            margin-right: 1.5in;
+            line-stacking-strategy: block-line-height;
+            color: #1c1b1a;
+            font-family: "Linux Libertine O", serif;
+            font-variant: prince-opentype(onum);
+            font-variant-numeric: oldstyle-nums;
+            font-size: 10pt;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 130%;
+            margin-bottom: 6pt;
+            orphans: 2;
+            page-break-after: auto;
+            page-break-before: auto;
+            text-align: justify;
+            text-align-last: left;
+            widows: 2;
+            vertical-align: baseline;
+            counter-increment: paragraph;
+        }
+    </style>
+</head>
+<body>
+<p style="page-break-after: always;"> </p>
+<div id="contributorList">
+<p>Lee Campbell</p>
+<p>Paul Couillard</p>
+<p>Lai-Tze Fan</p>
+<p>Antoine Fauchié</p>
+<p>Marion Gruner</p>
+<p>Angela Joosse</p>
+<p>Margot Mellet</p>
+<p>Brandon Petryna</p>
+<p>Joshua Synenko</p>
+<p>Monique Tschofen</p>
+<p>Marcello Vitali-Rosati</p></div>
+<div id="imaginations-logo"> <img src="static/img/Imaginations-logo-whitebkgd-cmyk.svg" width="560"/> </div>
+<div id="issue-title">Vibrant Materialities Across Media, Literature, and Theory</div>
+<div id="issue-editor">Guest Editors: Monique Tschofen, Lai-Tze Fan</div>
+<div id="issue">Issue 14-2, 2023</div>
+<!-- page 2 -->
+<div id="issue-title-top">Vibrant Materialities Across Media, Literature, and Theory</div>
+<div id="guest-editor">Guest Editors: Monique Tschofen, Lai-Tze Fan</div>
+<!-- <div id='issue-top'>Issue 11-3, 2020</div> -->
+<div id="team">
+<p class="team-heading">Editor in Chief | Rédacteur en chef</p>
+<p><span class="Credits-Red-Name">Markus Reisenleitner</span></p>
+<p class="team-heading">Managing Editor | Rédacteur</p>
+<p><span class="Credits-Red-Name">Brent Ryan Bellamy</span></p>
+<p class="team-heading">Editorial Team | Comité de rédaction</p>
+<p>Brent Ryan Bellamy, Antara Dey, Dominique Laurent, M.E. Luka, Margot Mellet</p>
+<!-- <p class='team-heading'>Elicitations Reviews Editor | Comptes rendus critiques – Élicitations</p>
+        <p>Margot Mellet</p> -->
+<p class="team-heading">Web Editor | Mise en forme web</p>
+<p>Brent Ryan Bellamy</p>
+<p class="team-heading">French Translator &amp; Copy Editor | Traductions françaises</p>
+<p>Gwladys Bertin, Dominique Laurent</p>
+<p class="team-heading">English Substantive &amp; Copy Editor | Rédacteur</p>
+<p>Lee Campbell</p>
+<p class="team-heading">Founding Editors | Fondateurs</p>
+<p>William Anselmi, Daniel Laforest, Carrie Smith-Prei, Sheena Wilson</p>
+<p class="team-heading">Previous Team Members | Anciens membres de l’équipe</p>
+<p>Marine Gheno, Dennis Kilfoy, Daniel Laforest, Andriko Lozowy, <br/>Aurélie Lesueur, John Montague, Lars Richter, Katherine Rollans, <br/>Angela Sacher, Dalbir Sehmby, Justin Sully</p>
+<p class="team-heading">Editorial Advisory Board | Comité scientifique</p>
+<p>Hester Baer, University of Maryland College Park, United States</p>
+<p>Mieke Bal, University of Amsterdam &amp; Royal Netherlands Academy <br/>of Arts and Sciences, Netherlands </p>
+<p>Andrew Burke, University of Winnipeg, Canada</p>
+<p>Ollivier Dyens, Concordia University, Canada</p>
+<p>Michèle Garneau, Université de Montréal, Canada</p>
+<p>Wlad Godzich, University of California Santa Cruz, United States</p>
+<p>Kosta Gouliamos, European University, Cyprus</p>
+<p>Faye Hammill, University of Strathclyde, United Kingdom</p>
+<p>Anton Kaes, University of California Berkeley, United States</p>
+<p>Dominic McIver Lopes, University of British Columbia, Canada</p>
+<p>Sarah McGaughey, Dickinson College, United States</p>
+<p>Marie-Dominique Popelard, Université de la Sorbonne Nouvelle - Paris, France</p>
+<p>Christine Ramsay, University of Regina, Canada</p>
+<p>Laurence A. Rickels, Academy of Fine Arts, Karlsruhe, Germany</p>
+<p>Carrie Smith, University of Alberta, Canada</p>
+<p>Will Straw, McGill Univeristy, Canada</p>
+<p>Imre Szeman, University of Alberta, Canada</p>
+<p>Sheena Wilson, University of Alberta, Canada</p>
+</div>
+<div id="csi-logo"> <img src="static/img/CSI_logo.jpg" width="180"/> </div>
+<div id="sshrc-logo"> <img src="static/img/SSHRC-support-logo-long.jpg" width="470"/> </div>
+<div id="doi"><a href="http://dx.doi.org/None">http://dx.doi.org/None</a></div>
+<div id="financial-support"><em>Imaginations</em> is supported by the Social Sciences and Humanities Research Council of Canada, the Faculty of Liberal Arts and Professional Studies at York University, and the Department of Humanities at York University </div>
+<!-- Add acknowledgements on the inside page here. -->
+<!-- page 3 -->
+<!-- the fourth page -->
+<div id="table-of-contents"><p class="toc-heading">Sommaire/Contents</p>
+<p class="toc-title"><a href="html/00-tschofen-fan.html">Introduction: Vibrant Materialities Across Media, Literature, and Theory</a><span class="page-number"> • 5</span></p><p class="toc-author">Monique Tschofen, Lai-Tze Fan</p>
+<p class="toc-title"><a href="html/01-fauchie-mellet-vitali-rosati.html">Pensée et collectif dans la matérialité de nos écritures</a><span class="page-number"> • 19</span></p><p class="toc-author">Antoine Fauchié, Margot Mellet, Marcello Vitali-Rosati</p>
+<p class="toc-title"><a href="html/02-mellet.html">À la poursuite du fait littéraire : Perspective plastique et technique du texte</a><span class="page-number"> • 41</span></p><p class="toc-author">Margot Mellet</p>
+<p class="toc-title"><a href="html/03-campbell.html">Reading Like A Replicant: Blade Runner 2049, Pale Fire, and the Archival Embodiment of Literature</a><span class="page-number"> • 77</span></p><p class="toc-author">Lee Campbell</p>
+<p class="toc-title"><a href="html/04-couillard.html">Things, Assemblages, Worlds: Locating Vibrancy Beyond a Subject-Object Relationship (A Tale of Disposition)</a><span class="page-number"> • 101</span></p><p class="toc-author">Paul Couillard</p>
+<p class="toc-title"><a href="html/05-joosse.html">Embodied Relational Process in P. Megan Andrews’ <em>the disorientation project</em></a><span class="page-number"> • 127</span></p><p class="toc-author">Angela Joosse</p>
+<p class="toc-title"><a href="html/06-tschofen.html">Becoming Matter/Becoming Mother: Wilding in Ali Abbasi’s Border (Gräns)</a><span class="page-number"> • 149</span></p><p class="toc-author">Monique Tschofen</p>
+<p class="toc-title"><a href="html/07-synenko.html">“Where Does This World End?” Space, Time and Image in Harun Farocki’s Parallel I-IV</a><span class="page-number"> • 175</span></p><p class="toc-author">Joshua Synenko</p>
+<p class="toc-title"><a href="html/08-gruner.html">Reader Worlds: Constructing Context for Historical Readers of Pulp Fiction with Google Earth</a><span class="page-number"> • 207</span></p><p class="toc-author">Marion Gruner</p>
+<p class="toc-title"><a href="html/09-petryna.html">Animated Life Writing</a><span class="page-number"> • 233</span></p><p class="toc-author">Brandon Petryna</p>
+<p class="toc-title"><a href="html/10-contributors.html">Contributors</a><span class="page-number"> • 261</span></p><p class="toc-author"></p>
+</div>
+<div id="image-credit">Cover image: Étienne-Jules Marey “Falling Cat.” Public domain, 1894</div>
+</body>
+</html>

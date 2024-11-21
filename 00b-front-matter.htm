@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /*This is the template for the generated front matter. Any changes made here will be reflected in the generated front matter.*/ -->
+
+<head>
+    <meta charset='utf-8'>
+    <title> Visibility and Translation </title>
+    <style>
+        @page {
+            size: 7in 10in;
+            margin: 0;
+        }
+
+        html,
+        body,
+        div,
+        header,
+        p,
+        blockquote,
+        ul,
+        ol,
+        li,
+        pre {
+            margin: 0;
+            padding: 0;
+            hyphens: none;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        /* the first page (DIVs like outside cover, more or less) */
+
+        #contributorList {
+            position: absolute;
+            left: 3.5in;
+            top: 0.6in;
+            padding-top: 0.7in;
+            padding-left: 3em;
+            padding-right: 3em;
+            padding-bottom: 500pt;
+            color: black;
+            font-family: 'Muli SemiBold', sans-serif;
+            font-size: 10pt;
+            line-height: 18pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: uppercase;
+            z-index: 1;
+        }
+
+        #imaginations-logo {
+            position: absolute;
+            left: 56px;
+            top: 7.2in;
+            background-color: white;
+            z-index: 2;
+        }
+
+        #issue-title {
+            position: absolute;
+            left: 56px;
+            top: 8.3in;
+            font-family: 'Muli ExtraBold', sans-serif;
+            color: gray;
+            font-size: 18pt;
+            line-height: 21pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        #issue-editor {
+            position: absolute;
+            left: 56px;
+            top: 9.5in;
+            font-family: "Muli", sans-serif;
+            font-size: 12pt;
+            font-style: italic;
+            color: #807c7e;
+            z-index: 3;
+        }
+
+        #issue {
+            position: absolute;
+            left: 5.2in;
+            top: 9.5in;
+            font-family: 'Muli', sans-serif;
+            font-size: 10pt;
+            font-style: italic;
+            color: grey;
+            break-after: page;
+        }
+
+        /* the second page */
+        #issue-title-top {
+            position: absolute;
+            left: 1.3in;
+            top: 0.6in;
+            padding-right: 0.4in;
+            font-family: 'Muli';
+            color: rgb(241, 88, 68);
+            font-size: 14pt;
+            line-height: 18pt;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        #issue-top {
+            position: absolute;
+            left: 5.2in;
+            top: 0.4in;
+            font-family: 'Muli', sans-serif;
+            font-size: 10pt;
+            font-style: italic;
+            color: gray;
+        }
+
+        #guest-editor {
+            position: absolute;
+            left: 1.3in;
+            top: 1.4in;
+            font-family: 'Muli', sans-serif;
+            font-size: 12pt;
+            color: gray;
+        }
+
+        #team {
+            position: absolute;
+            right: 0in;
+            top: 1.6in;
+            padding-right: 0.9in;
+            font-family: 'Muli Light', sans-serif;
+            color: gray;
+            font-size: 8pt;
+            line-height: 10.5pt;
+            font-style: italic;
+            text-align: right;
+            text-transform: none;
+        }
+
+        #csi-logo {
+            position: absolute;
+            left: 1.3in;
+            top: 8.5in;
+            background-color: white;
+            z-index: 2;
+        }
+
+        #sshrc-logo {
+            position: absolute;
+            left: 1.3in;
+            top: 9.1in;
+            background-color: white;
+            z-index: 2;
+        }
+
+        #doi {
+            display: none;
+            position: absolute;
+            left: 3.8in;
+            top: 8.8in;
+            font-family: 'Muli Light', sans-serif;
+            color: gray;
+            font-size: 8pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        #financial-support {
+            position: absolute;
+            left: 1.3in;
+            top: 9.4in;
+            padding-right: 0.9in;
+            font-family: 'Muli Light', sans-serif;
+            color: gray;
+            font-size: 8pt;
+            line-height: 10pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: none;
+            break-after: page;
+        }
+
+        /* the TOC page */
+        #table-of-contents {
+            page-break-before: always;
+            position: absolute;
+            left: 1.3in;
+            top: 1in;
+            padding-right: 0.6in;
+            font-family: 'Muli Light', sans-serif;
+            color: gray;
+            font-size: 9pt;
+            line-height: 11pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: none;
+        }
+
+        #image-credit {
+            position: absolute;
+            border-style: solid;
+            border-width: 0.5px 0 0 0;
+            border-color: gray;
+            left: 0;
+            padding-top: 0.1in;
+            padding-left: 1.3in;
+            margin-right: 0.9in;
+            top: 9.3in;
+            font-family: 'Muli SemiBold', sans-serif;
+            color: gray;
+            font-size: 8pt;
+            line-height: 11pt;
+            text-align: left;
+        }
+
+        /* classes for formatting */
+        h2 {
+            font-family: 'Muli SemiBold', sans-serif;
+            font-style: normal;
+            color: black;
+            font-size: 9pt;
+            line-height: 10pt;
+            text-align: left;
+        }
+
+        .team-heading {
+            margin-top: 0.0625in;
+            font-family: 'Muli', sans-serif;
+            color: gray;
+            font-size: 9pt;
+        }
+
+        .Credits-Red-Name {
+            color: rgb(241, 88, 68);
+        }
+
+        .toc-heading {
+            margin-bottom: 0.3in;
+            font-family: 'Muli SemiBold', sans-serif;
+            font-style: normal;
+            color: black;
+            font-size: 9pt;
+            line-height: 11pt;
+            text-align: left;
+        }
+
+        .toc-sub-heading {
+            margin-top: 11pt;
+            margin-bottom: 0;
+            font-family: 'Muli SemiBold', sans-serif;
+            font-style: normal;
+            color: black;
+            font-size: 9pt;
+            line-height: 11pt;
+            text-align: left;
+        }
+
+        .toc-title {
+            margin-top: 0.1in;
+            color: rgb(241, 88, 68);
+        }
+
+        .toc-title a {
+            font-family: 'Muli Light', sans-serif;
+            font-size: 9pt;
+            line-height: 11pt;
+            color: rgb(241, 88, 68);
+            font-style: italic;
+            text-align: left;
+            text-decoration: none;
+            text-transform: none;
+        }
+
+        .toc-author {
+            padding-left: 0.125in;
+        }
+
+        .page-number {
+            color: gray;
+        }
+
+        .toc-anchor a {
+            color: gray;
+            text-decoration-line: underline !important;
+            text-decoration-style: dotted !important;
+        }
+
+        .acknowledgements h1 {
+            page-break-before: always;
+            hyphens: none;
+            -epub-hyphens: none;
+            -webkit-column-span: all;
+            /* Chrome, Safari, Opera */
+            column-span: all;
+            color: #e9362c;
+            padding-top: 1.5in;
+            font-family: "Muli SemiBold", sans-serif;
+            font-size: 12.5px;
+            font-weight: 500;
+            line-height: 19pt;
+            margin-bottom: 6px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .acknowledgements p {
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+            margin-left: 1.5in;
+            margin-right: 1.5in;
+            line-stacking-strategy: block-line-height;
+            color: #1c1b1a;
+            font-family: "Linux Libertine O", serif;
+            font-variant: prince-opentype(onum);
+            font-variant-numeric: oldstyle-nums;
+            font-size: 10pt;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 130%;
+            margin-bottom: 6pt;
+            orphans: 2;
+            page-break-after: auto;
+            page-break-before: auto;
+            text-align: justify;
+            text-align-last: left;
+            widows: 2;
+            vertical-align: baseline;
+            counter-increment: paragraph;
+        }
+    </style>
+</head>
+
+<body>
+    <p style="page-break-after: always;">&nbsp;</p>
+    <div id='contributorList'>
+        <p class='Credits-Red-Name'> Contributors </p>
+        <p>&nbsp;</p>
+        <p>REBECCA CARLSON</p>
+        <p>DONATELLA DELLA RATTA</p>
+        <p>POLINA GOLOVÁTINA-MORA</p>
+        <p>DAN HARRIS</p>
+        <p>MARY ELIZABETH LUKA</p>
+        <p>ANNETTE N MARKHAM</p>
+        <p>MARY-ROSE MCLAREN</p>
+        <p>VERONICA MITCHELL</p>
+        <p>CORINNA PETERKEN</p>
+        <p>KIM SNEPVANGERS</p>
+        <p>ANNE SORONEN</p>
+        <p>DARKO SUVIN</p>
+        <p>KAROLIINA TALVITIE-LAMBERG</p>
+        <p>ANDY FISCHER WRIGHT</p>
+    </div>
+    <div id='imaginations-logo'> <img src='static/img/Imaginations-logo-whitebkgd-cmyk.svg' width='560' /> </div>
+    <div id='issue-title'>Massive/Micro Sensemaking</div>
+    <div id="issue-editor"> Guest Editors: Mary Elizabeth Luka, Annette N Markham, Dan Harris</div>
+    <div id='issue'>Issue 12-2, 2021</div>
+    <!-- page 2 -->
+    <div id='issue-title-top'>Massive/Micro Sensemaking</div>
+    <div id='guest-editor'>Guest Editors: <span class='Credits-Red-Name'>Mary Elizabeth Luka, Annette N Markham, Dan Harris</span>
+    </div>
+    <!-- <div id='issue-top'>Issue 11-3, 2020</div> -->
+    <div id='team'>
+        <p class='team-heading'>Editor in Chief | Rédacteur en chef</p>
+        <p><span class='Credits-Red-Name'>Markus Reisenleitner</span></p>
+        <p class='team-heading'>Managing Editor | Rédacteur</p>
+        <p><span class='Credits-Red-Name'>Brent Ryan Bellamy</span></p>
+        <p class='team-heading'>Editorial Team | Comité de rédaction</p>
+        <p>Brent Ryan Bellamy, Antara Dey, Dominique Laurent, M.E. Luka, Margot Mellet</p>
+        <!-- <p class='team-heading'>Elicitations Reviews Editor | Comptes rendus critiques – Élicitations</p>
+        <p>Margot Mellet</p> -->
+        <p class='team-heading'>Web Editor | Mise en forme web</p>
+        <p>Brent Ryan Bellamy</p>
+        <p class='team-heading'>French Translator &amp; Copy Editor | Traductions françaises</p>
+        <p>Gwladys Bertin, Dominique Laurent</p>
+        <p class='team-heading'>English Substantive &amp; Copy Editor | Rédacteur</p>
+        <p>Lee Campbell</p>
+        <p class='team-heading'>Founding Editors | Fondateurs</p>
+        <p>William Anselmi, Daniel Laforest, Carrie Smith-Prei, Sheena Wilson</p>
+        <p class='team-heading'>Previous Team Members | Anciens membres de l’équipe</p>
+        <p>Marine Gheno, Dennis Kilfoy, Daniel Laforest, Andriko Lozowy, <br />Aurélie Lesueur, John Montague, Lars Richter, Katherine Rollans, <br />Angela Sacher, Dalbir Sehmby, Justin Sully</p>
+        <p class='team-heading'>Editorial Advisory Board | Comité scientifique</p>
+        <p>Hester Baer, University of Maryland College Park, United States</p>
+        <p>Mieke Bal, University of Amsterdam &amp; Royal Netherlands Academy <br />of Arts and Sciences, Netherlands </p>
+        <p>Andrew Burke, University of Winnipeg, Canada</p>
+        <p>Ollivier Dyens, Concordia University, Canada</p>
+        <p>Michèle Garneau, Université de Montréal, Canada</p>
+        <p>Wlad Godzich, University of California Santa Cruz, United States</p>
+        <p>Kosta Gouliamos, European University, Cyprus</p>
+        <p>Faye Hammill, University of Strathclyde, United Kingdom</p>
+        <p>Anton Kaes, University of California Berkeley, United States</p>
+        <p>Dominic McIver Lopes, University of British Columbia, Canada</p>
+        <p>Sarah McGaughey, Dickinson College, United States</p>
+        <p>Marie-Dominique Popelard, Université de la Sorbonne Nouvelle - Paris, France</p>
+        <p>Christine Ramsay, University of Regina, Canada</p>
+        <p>Laurence A. Rickels, Academy of Fine Arts, Karlsruhe, Germany</p>
+        <p>Carrie Smith, University of Alberta, Canada</p>
+        <p>Will Straw, McGill Univeristy, Canada</p>
+        <p>Imre Szeman, University of Alberta, Canada</p>
+        <p>Sheena Wilson, University of Alberta, Canada</p>
+    </div>
+    <div id='csi-logo'> <img src='static/img/CSI_logo.jpg' width='180'> </div>
+    <div id='sshrc-logo'> <img src='static/img/SSHRC-support-logo-long.jpg' width='470'> </div>
+    <div id='doi'><a href='http://dx.doi.org/10.17742/IMAGE.VT.11.3' target='_blank'>http://dx.doi.org/10.17742/IMAGE.MM.12.2</a> </div>
+    <div id='financial-support'><em>Imaginations</em> is supported by the Social Sciences and Humanities Research Council of Canada, the Faculty of Liberal Arts and Professional Studies at York University, and the Department of Humanities at York University </div>
+    <!-- Add acknowledgements on the inside page here. -->
+    <!-- page 3 -->
+    <!-- the fourth page -->
+    <div id='table-of-contents'>
+        <p class='toc-heading'>Sommaire/Contents</p>
+        <p class='toc-title'><a href=html/01-luka.html>Massive/Micro Sensemaking: Towards Post-Pandemic Futures</a><span class='page-number'> • 5</span></p>
+        <p class='toc-author'>Mary Elizabeth Luka, Annette N Markham, Dan Harris</p>
+        <p class='toc-title'><a href=html/02-carlson.html>A Patchworking Process: Coming Together under Pandemic Conditions for Collaborative, Caring Scholarship</a><span class='page-number'> • 29</span></p>
+        <p class='toc-author'>Rebecca Carlson, Polina Golovátina-Mora, Corinna Peterken, Kim Snepvangers, Anne Soronen, Karoliina Talvitie-Lamberg</p>
+        <p class='toc-title'><a href=html/interlude-01.html>Interlude I</a><span class='page-number'> • 35</span></p>
+        <p class='toc-title'><a href=html/09-peterken.html>Walking, Staying In, and Making Sense: Quilting with Pandemic Matter</a><span class='page-number'> • 37</span></p>
+        <p class='toc-author'>Corinna Peterken</p>
+        <p class='toc-title'><a href=html/11-snepvangers.html>Rendering Self and Microagressions Visible Through the Shadow Image</a><span class='page-number'> • 71</span></p>
+        <p class='toc-author'>Kim Snepvangers</p>
+        <p class='toc-title'><a href=html/07-mclaren.html>Making Sense of Noise – A Symphony for Voices</a><span class='page-number'> • 97</span></p>
+        <p class='toc-author'>Mary-Rose McLaren</p>
+        <p class='toc-title'><a href=html/05-luka.html>Resilience in Pandemic Sensemaking: Thinking Through a Community of Practice</a><span class='page-number'> • 139</span></p>
+        <p class='toc-author'>Mary Elizabeth Luka</p>
+        <p class='toc-title'><a href=html/interlude-02.html>Interlude II</a><span class='page-number'> • 169</span></p>
+        <p class='toc-author'></p>
+        <p class='toc-title'><a href=html/03-carlson.html>(Imagining) Science for Troubled Times: A Mouse, a Bird, and a Threshold for Collaboration</a><span class='page-number'> • 171</span></p>
+        <p class='toc-author'>Rebecca Carlson</p>
+        <p class='toc-title'><a href=html/13-wright.html>The Notifiction: How Push Notifications from Neighbourhood Surveillance Apps Can Create an Alternative Narrative of Place</a><span class='page-number'> • 201</span></p>
+        <p class='toc-author'>Andy Fischer Wright</p>
+        <p class='toc-title'><a href=html/10-della-ratta.html>‘Selfies’ Under Quarantine: Exploring Networked Emotions in the Time of ‘Social Distancing’</a><span class='page-number'> • 223</span></p>
+        <p class='toc-author'>Donatella Della Ratta</p>
+        <p class='toc-title'><a href=html/06-markham.html>Making Sense of What We Can’t See: A Visual Retrospective of COVID-19</a><span class='page-number'> • 251</span></p>
+        <p class='toc-author'>Annette N Markham</p>
+        <p class='toc-title'><a href=html/interlude-03.html>Interlude III</a><span class='page-number'> • 265</span></p>
+        <p class='toc-author'></p>
+        <p class='toc-title'><a href=html/08-mitchell.html>Un/thinking with Thread/s: Needling Through Boundaries Related to COVID-19 and Medical Training</a><span class='page-number'> • 267</span></p>
+        <p class='toc-author'>Veronica Mitchell</p>
+        <p class='toc-title'><a href=html/12-soronen.html>Listening to and Living With Networked Media During a Pandemic</a><span class='page-number'> • 297</span></p>
+        <p class='toc-author'>Anne Soronen, Karoliina Talvitie-Lamberg</p>
+        <p class='toc-title'><a href=html/04-golovatina-mora.html>Skipping on the Grains of Multiverses Towards a Portal: World-Building Experience</a><span class='page-number'> • 323</span></p>
+        <p class='toc-author'>Polina Golovátina-Mora</p>
+        <p class='toc-sub-heading'> Standalone article</p>
+        <p class='toc-title'><a href=html/14-suvin.html>Satoh's <i>Dance of Angels</i> as a Dramaturgical Discourse Seeking and Doubting the Young Generation’s Revolution</a><span class='page-number'> • 343</span></p>
+        <p class='toc-author'>Darko Suvin</p>
+        <p class='toc-title'><a href=15-contributor-bios.html>Contributors</a><span class='page-number'> • 381</span>
+        </p>
+        <p class='toc-author'></p>
+    </div>
+    <div id='image-credit'> Image Credit: </div>
+</body>
+
+</html>

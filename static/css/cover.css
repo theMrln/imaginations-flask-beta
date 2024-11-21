@@ -1,0 +1,110 @@
+@prince-pdf {
+    prince-pdf-page-layout: two-page-right;
+    prince-pdf-page-mode: show-bookmarks;
+}
+
+@page {
+    size: 7in 10in;
+}
+html,
+body,
+div,
+header,
+p,
+blockquote,
+ul,
+ol,
+li,
+pre {
+    margin: 0;
+    padding: 0;
+    hyphens: none;
+}
+body {
+    background-repeat: no-repeat;
+    background-image:
+    url(imaginations-logo.jpg),
+    url(00a-front-page.png);
+    background-position:
+    /* list */
+    0in 0in,
+    0in 1.2in;
+    /* 0cm 2.858cm; */
+    background-size:
+    5.5in,
+    2.4in;
+}
+
+hr {
+    display: none;
+    /* should be done with borders rather than the hr tag */
+}
+
+a {
+    color: #ef4136;
+    text-decoration: none;
+}
+#current-issue {
+    position: absolute;
+    left: 2.7in;
+    top: 1.2in;
+    color: #231f20;
+    font-family: "Muli", sans-serif;
+    font-size: 8.5pt;
+    line-height: 1.455;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: left;
+
+}
+#citation {
+    position: absolute;
+    top: 4.8in;
+    color: #231f20;
+    font-family: "Muli Light", sans-serif;
+    font-size: 11pt;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.455;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+}
+
+#image-credit{
+    position: absolute;
+    left: 2.7in;
+    top: 4.28in;
+    color: #231f20;
+    font-family: "Muli", sans-serif;
+    font-size: 8.5pt;
+    line-height: 1.455;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: left;
+}
+
+#creative-commons {
+    position: absolute;
+    top: 6.5in;
+    background-repeat: no-repeat;
+    background-image: url(by-nc-nd.png);
+    background-position: center top;
+    background-size: 1.2in;
+}
+.creative-commons {
+    padding-top: 0.8in;
+    color: #231f20;
+    font-family: "Minion Pro", serif;
+    font-size: 12px;
+    font-size: 10pt;
+    text-align: justify;
+}
+.current-issue {
+    font-size: 12.5pt;
+    padding-top: 12.5pt;
+}
