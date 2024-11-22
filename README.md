@@ -1,11 +1,9 @@
 # Site generator for the journal _Imaginations_
 
-This site generator automates the workflows for multiformat journal production. It uses python as the main programming language. It also requires the installation of pandoc and princexml(for PDF generation) and uses a lua filter (lua is integrated in the standard installation of pandoc). It assumes that typeset files are uploaded to a wordpress installation as well as OJS, and interfaces with both frameworks. OJS is at the moment the default location for entering metadata and monitor workflow. The site generator relies heavily on a set directory structure and corresponding filenames for json, docx, markdown, html, and pdf formats. The naming schema is the most obvious source of bugs and should be checked first when a site build fails or has unexpected results.
-
-The following steps are performed:
+These scripts perform the following functions for generating a complete issue of the journal _Imaginations_:
 
 1. conversion of copyedited docx files into markdown (where they are cleaned up.) Requires pandoc and lua filter.
-2. conversion of metadata for each file from xml (xml is exported from OJS) to json.
+2. access to metadata that are entered in OJS through the OJS API (OJS 3.3).
 3. conversion of markdown files to html (requires pandoc and depends on json metadata)
 4. generation of article cover pages from json in html format
 5. generation of front page and front matter from json (html and pdf)
@@ -14,75 +12,13 @@ The following steps are performed:
 8. generation of the complete issue PDF from html front matter and html files
 9. Consistent updates when data are changed in OJS
 
-At any stage, json and html files can be updated from modified (re-exported) OJS export (xml format).
-
 ## Guiding principles
 
 - minimal computing, avoid over-engineering
 - single language, modular design
 - minimize dependencies (python standard library including Tkinter, Beautiful Soup, pandoc, prince)
-- integrate into OJS and WP workflows
-- tools-based approach over turnkey solutions
-- each script is a tool in the workflow, separation of concerns!
+- integrate into OJS workflows
+- each script is a tool in the workflow
 - components can be swapped out
-- open standards, human-readable, archivable formats: json, markdown, html
+- open standards, human-readable, archivable formats: json, markdown, html (self-contained: images, fonts are base64 encoded)
 - OS-independent
-
-## HOWTO
-
-The following steps are performed individually in the build process:
-
-### metadata
-
-1. create a new issue in OJS
-2. enter metadata of all the articles in OJS
-3. load the interface and update the issue and article metadata; enter OJS ID into issue data first!
-
-
-### preparing article texts
-
-1. place copyedited word files into the /docx subdirectory; filenames must correspond to json filenames, extension needs to be .docx
-2. run **py_b_import_from_word.py** to generate markdown files (.md files and image folders will be placed in /markdown subdir) NB: The lua filter overrides automatic placement of images in the pandoc conversion and strips image dimension information.
-3. check markdown files for consistency and remove extra formatting
-
-### typesetting of articles
-
-1. run **py_c_convert2html.py** to convert markdown files to html (needs pandoc). This script relies on both the metadata files in the /json subdir and the markdown files in the /markdown subdir. Output will be placed in the html/ subdir.
-2. typesetting of articles in html format, PDFs via prince (placed in PDF/ subdir). There are 2 options:
-   - **py_c2_convhtml2prince.py** converts all html files in the html/ directory
-   - **py_c2_convhtml2prince_gui.py** opens a file selector dialog to convert one or more html files
-
-### creating the front matter
-
-1. select cover image, place it in **???** subdir
-2. run **py_d_generate_cover.py** to generate (and tweak) cover page
-
-### creating cover pages of individual articles
-
-1. run **py_e_cover-pdf2image.py** to convert the cover from PDF to png
-2. run **py_f_generate-individual-cover-from-json.py** to generate html cover pages, placed in html-covers/ subdir and PDF-covers/ subdir
-3. run **py_g_generate-pdf-cum-cover.py** to generate PDFs of individual articles that include the cover pages
-
-### issue creation
-
-1. run **py_h_front-matter-toc-from-json.py** to generate the front matter
-2. run **py_i_generate-whole-issue.py** to generate a complete PDF
-3. upload html and pdf to wordpress (html can be automated through REST API, **wp-upload.py**)
-4. upload pdf to OJS OR: generate a complete issue xml and upload that via import plugin
-
-### rinse and repeat
-
-1. all the automated steps rely on both the json metadata files and html files
-2. if json metadata are updated, run **update_html.py** to have those updates reflected in the html files
-3. any changes in json metadata need to be done in OJS as well, there is currently no automated pipeline
-4. uploads/updates to wordpress can be done with **upload-wp.py**, **update-wp.py**
-
-## TODOs
-
-- [ ] images still need to be manually uploaded to wordpress --> REST
-- [ ] same for PDFs
-- [ ] html meta tags generated by pandoc are incomplete, check DC
-- [ ] COinS
-- [ ] secure the wordpress and OJS access keys
-- [ ] the script files that do not start with py\* are proof of concept, not operational
-- [ ] transition route to paged.js
