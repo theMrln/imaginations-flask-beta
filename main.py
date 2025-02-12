@@ -178,11 +178,13 @@ def delete(the_file):
 # endpoint for displaying raw json files
 @app.route("/show_json/<the_file>", methods=["GET"])
 def show_json(the_file):
-    if os.path.exists(f"json/{the_file}"):
-        with open(f"json/{the_file}") as data_file:
+    if os.path.exists(f'json/{the_file}'):
+        with open(f'json/{the_file}') as data_file:
             my_file = json.load(data_file)
     else:
-        flash(f"{my_file} not found")
+        my_file = the_file + ' not found'
+    return my_file
+
 
 
 # endpoint for uploading word files
