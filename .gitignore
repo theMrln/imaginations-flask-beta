@@ -10,7 +10,7 @@
 *.png
 *.ppm
 *.paw
-node_modules/
+
 static/PDF/
 static/PDF-covers/
 venv/
