@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en-ca">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  $for(contributors)$
+  <meta name="author" content="$contributors.first$ $contributors.last$">
+  $endfor$
+  $if(title)$
+  <title>$title$</title>
+  $endif$
+
+  <style>
+    /* reset */
+
+    html,
+    body,
+    div,
+    header,
+    p,
+    blockquote,
+    ul,
+    ol,
+    li,
+    pre {
+      margin: 0;
+      padding: 0;
+      hyphens: auto;
+    }
+
+    body {
+      position: relative;
+      max-width: 388px;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 50px 0 50px;
+    }
+
+    /* basic html5 classes */
+
+    /* todo: refactor with variables! */
+
+    :root {
+      --serif-font: "Linux Libertine O", serif;
+      --sans-font: "Muli", sans-serif;
+    }
+
+    article {
+      text-align: justify;
+      vertical-align: baseline;
+      hyphens: auto;
+      counter-reset: paragraph;
+    }
+
+    figure {
+      font-size: 0.9em;
+      counter-increment: figure;
+      break-inside: avoid;
+    }
+
+    figcaption {
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+      color: #a3aaa7;
+      font-weight: normal;
+      font-size: 7pt;
+      font-family: var(--sans-font);
+      font-variant: prince-opentype(dlig, onum);
+      line-height: 12.554pt;
+      text-align: center;
+      -epub-hyphens: none;
+      hyphens: none;
+      orphans: 1;
+      break-before: avoid;
+      border-bottom: 1px solid #ddd;
+    }
+
+    figcaption::before {
+      /* generated content for counters */
+      font-weight: normal;
+
+      /* content: "Figure " counter(figure) ": " */
+    }
+
+    img {
+      display: block;
+      max-width: 280pt;
+      max-height: 600pt;
+      /* margin-right: auto;
+      margin-left: auto; */
+      margin: 0 auto;
+      padding: 6pt 0 6pt 0;
+    }
+
+    /* basic document classes */
+
+    h1 {
+      margin-bottom: 6px;
+      color: #e9362c;
+      font-weight: 500;
+      font-size: 12.5px;
+      font-family: var(--sans-font);
+      line-height: 19pt;
+      text-align: center;
+      text-transform: uppercase;
+      -epub-hyphens: none;
+      hyphens: none;
+      -webkit-column-span: all;
+
+      /* Chrome, Safari, Opera */
+      column-span: all;
+      page-break-after: avoid;
+      break-before: page;
+      string-set: chapter-title content();
+      counter-reset: page 5;
+    }
+
+    h2 {
+      margin-top: 12pt;
+      margin-bottom: 12pt;
+      color: #e9362c;
+      font-weight: 500;
+      font-size: 9pt;
+      font-family: var(--sans-font);
+      line-height: 12.554pt;
+      text-align: left;
+      text-transform: uppercase;
+      -epub-hyphens: none;
+      hyphens: none;
+    }
+
+    h3,
+    h4 {
+      margin-top: 0;
+      margin-right: 0;
+      margin-bottom: 6pt;
+      margin-left: 0;
+      color: #e9362c;
+      font-weight: 500;
+      font-size: 10px;
+      font-family: var(--sans-font);
+      line-height: 12.554pt;
+      text-align: left;
+      -epub-hyphens: none;
+      hyphens: none;
+      orphans: 99;
+      page-break-after: avoid;
+      page-break-before: auto;
+    }
+
+    p,
+    li {
+      margin-bottom: 6pt;
+      /* margin-left: 1.5em; */
+      color: #1c1b1a;
+      font-size: 10pt;
+      font-family: var(--serif-font);
+      font-style: normal;
+      font-variant: prince-opentype(onum);
+      font-variant-numeric: oldstyle-nums;
+      line-height: 130%;
+      text-align: justify;
+      text-align-last: left;
+      vertical-align: baseline;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+      orphans: 2;
+      page-break-after: auto;
+      page-break-before: auto;
+      widows: 2;
+      counter-increment: paragraph;
+      hanging-punctuation: first force-end last;
+    }
+
+    li {
+      margin-left: 1.5em;
+    }
+
+    table {
+      hyphens: none;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 5px;
+      border: 0.3px solid gray;
+    }
+
+    tr {
+      font-size: 8pt;
+      font-family: var(--sans-font);
+    }
+
+    .header tr {
+      font-style: italic;
+    }
+
+    td {
+      font-size: 8pt;
+      font-family: var(--sans-font);
+    }
+
+    /* for proofs: Please note that this messes up dropcaps in princexml!
+
+    p:before {
+    position: absolute;
+    margin-left: -20px;
+    color: #CCC;
+    content: counter(paragraph);
+    counter-increment: paragraph;
+    } */
+
+    blockquote,
+    blockquote p,
+    blockquote li {
+      margin-top: 0;
+      margin-right: 8px;
+      margin-bottom: 15px;
+      margin-left: 17px;
+      color: #828383;
+      font-size: 8.5pt;
+      font-family: var(--sans-font);
+      font-style: normal;
+      font-variant: prince-opentype(onum);
+      line-height: 12.554pt;
+      orphans: 2;
+      text-align: justify;
+      widows: 2;
+    }
+
+    code p {
+      padding: 6pt;
+      color: rgb(28, 129, 28);
+      font-size: 8pt;
+      font-family: "VT323", monospace;
+      background-color: lightgray;
+    }
+
+    sup {
+      position: relative;
+      top: -0.4em;
+      font-size: 8px;
+      vertical-align: baseline;
+    }
+
+    a {
+      color: #828383;
+      text-decoration: none;
+    }
+
+    .dropcap {
+      float: left;
+      margin-top: -0.074em;
+      margin-right: 0.05em;
+      margin-bottom: -0.273em;
+      color: #e9362c;
+      font-size: 4.863em;
+      line-height: 1;
+    }
+
+    .print_only {
+      display: none;
+    }
+
+    /* clear float after epigraph */
+
+    .EP+p {
+      clear: both;
+    }
+
+    hr {
+      display: none;
+    }
+
+    /* basic classes that are variables or otherwise set in pandoc */
+
+    .abstract,
+    .abstract p {
+      margin-bottom: 12pt;
+      color: #1c1b1a;
+      font-weight: normal;
+      font-size: 8pt;
+      font-family: var(--serif-font);
+      font-style: normal;
+      font-variant: prince-opentype(onum);
+      font-variant-numeric: oldstyle-nums;
+      line-height: 12.554pt;
+      text-align: justify;
+      text-align-last: left;
+      orphans: 2;
+      page-break-after: auto;
+      page-break-before: auto;
+      widows: 2;
+    }
+
+    .author,
+    .author p {
+      string-set: chapter-author content();
+      /* column-span: all; */
+      margin: auto;
+      margin-top: 6px;
+      margin-bottom: 18px;
+      color: #828383;
+      font-size: 8pt;
+      font-family: var(--sans-font);
+      line-height: 15pt;
+      text-align: center;
+      text-align-last: center;
+      text-transform: uppercase;
+      page-break-after: avoid;
+      page-break-before: avoid;
+    }
+
+    .footnotes {
+      margin-top: 10.8px;
+      padding-left: 0;
+      font-size: 9pt;
+      font-family: var(--serif-font);
+      font-variant: prince-opentype(onum);
+      line-height: 12.554pt;
+      text-align: justify;
+      text-align-last: left;
+    }
+
+    .footnotes ol {
+      margin-left: -20pt;
+      padding-left: 20pt;
+      list-style-position: outside;
+    }
+
+    .footnotes li {
+      padding-left: 10px;
+      text-indent: 0;
+    }
+
+    /* basic classes that need to be coded manually */
+
+    /* epigraph */
+    .EP,
+    .EP p {
+      float: right;
+      margin-bottom: 6pt;
+      margin-left: 60px;
+      color: #474847;
+      font-size: 8.5pt;
+      font-style: italic;
+      font-variant: prince-opentype(onum);
+      line-height: 12.554pt;
+      text-align: left;
+    }
+
+    .displayFlexbox {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+    }
+
+    .displayFlexItemLeft {
+      padding-right: 1rem;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: auto;
+    }
+
+    .displayFlexItemRight {
+      padding-left: 1rem;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: auto;
+    }
+
+    .displayFlexItemLeftAlt {
+      flex-basis: 45%;
+      padding-right: 1rem;
+    }
+
+    .displayFlexItemRightAlt {
+      flex-basis: 45%;
+      padding-left: 1rem;
+    }
+
+    .flexContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .flex-items {
+      flex-shrink: 3;
+    }
+
+    .display2col {
+      column-count: 2;
+      column-gap: 2em;
+    }
+
+    .float-bottom-right {
+      /* requires to be inside a float container */
+      float: right;
+      /* shape-outside only apply to float elements */
+      height: 100%;
+      /* take all the height */
+      margin-left: 15px;
+      /* push the image to the bottom */
+      display: flex;
+      align-items: flex-end;
+      /**/
+      shape-outside: inset(calc(100% - 100px) 0 0);
+      /* make the text flow on the top free space*/
+
+    }
+
+    /* pandoc uses refs for REF */
+    .REF {
+      margin-top: 6px;
+      padding-left: 28px;
+      font-family: var(--serif-font);
+      font-variant: prince-opentype(onum);
+      line-height: 10.5pt;
+      text-align: justify;
+      text-align-last: left;
+      text-indent: -28px;
+      orphans: 2;
+      widows: 2;
+    }
+
+    .REF p {
+      font-size: 9pt;
+    }
+
+    .REF h2,
+    .footnotes h2 {
+      color: black;
+    }
+
+    .footnotes p {
+      font-size: 9pt;
+    }
+
+    .figcaption p {
+      margin-bottom: 20px;
+      padding-bottom: 5px;
+      color: #a3aaa7;
+      font-weight: normal;
+      font-size: 7pt;
+      font-family: var(--sans-font);
+      font-variant: prince-opentype(dlig, onum);
+      line-height: 12.554pt;
+      text-align: center;
+      -epub-hyphens: none;
+      hyphens: none;
+      border-bottom: 1px solid #ddd;
+      orphans: 1;
+      break-before: avoid;
+    }
+
+    .figcaption::before {
+      /* generated content for counters */
+      font-weight: normal;
+
+      /* content: "Figure " counter(figure) ": " */
+    }
+
+    .pageBreak {
+      page-break-before: always;
+    }
+
+    .alignRight {
+      margin-bottom: 6pt;
+      /* margin-left: 1.5em; */
+      color: #1c1b1a;
+      font-size: 10pt;
+      font-family: var(--serif-font);
+      font-style: normal;
+      font-variant: prince-opentype(onum);
+      font-variant-numeric: oldstyle-nums;
+      line-height: 130%;
+      text-align: right !important;
+      text-align-last: right;
+      vertical-align: baseline;
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+      orphans: 2;
+      page-break-after: auto;
+      page-break-before: auto;
+      widows: 2;
+      counter-increment: paragraph;
+      hanging-punctuation: first force-end last;
+    }
+
+    .contributorFrench p {
+      color: darkgray;
+    }
+  </style>
+
+  $for(header-includes)$ $header-includes$ $endfor$
+</head>
+
+<body onload="snap(18, 'h1, img', 'height')">
+  <article> $for(include-before)$ $include-before$ $endfor$
+    <header id="title-block-header">
+
+      <h1 class="title" style="counter-reset: page $start_page$">$title$</h1>
+      <div class="author">$for(contributors)$$contributors.first$ $contributors.last$<br />$endfor$</div>
+      <div class="flexContainer">
+        $if(abstract)$ <div class="abstract displayFlexItemLeft" id="abstract">$abstract$</div>$endif$
+        $if(abstract_fr)$<div class="abstract displayFlexItemRight" id="abstract_fr" lang=fr>$abstract_fr$</div>$endif$
+      </div>
+    </header>
+    <hr> $body$ $for(include-after)$ $include-after$ $endfor$
+  </article>
+</body>
+
+</html>

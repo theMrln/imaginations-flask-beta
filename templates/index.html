@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<title>JSON list</title>
+
+{% endblock %}
+
+{% block main %}
+
+<button type="button" class="btn mb-4">
+    <a href="{{ url_for('app_json.issue_edit') }}">Edit issue data ({{ the_passed_issue_file }})</a>
+</button>
+
+<button type="button" class="btn mb-4">
+    <a href="{{ url_for('app_json.generate_contributors_page') }}">generate contributors' page</a>
+</button>
+
+<hr>
+<h2 class="h5 text-info">Metadata files of individual articles</h2>
+<div>
+    {% if the_passed_json_dict_list %}
+    <div class="row">
+        <div class="col-3">Filename</div>
+        <div class="col-7">Article title</div>
+        <div class="col-1">del</div>
+        <div class="col-1">raw json</div>
+    </div>
+    {% for entry in the_passed_json_dict_list %}
+
+    <div class="row bg-light border-bottom border-primary">
+        <div class='col-3'><a href="/jedit/{{ entry['fileidentstr'] }}.json">{{ entry['fileidentstr'] }}.json</a>
+        </div>
+        <div class='col-7'><a href="/jedit/{{ entry['fileidentstr'] }}.json">{{ entry['title'] }}</a></div>
+        <div class='col-1'><a href="{{ url_for('delete', the_file=entry['fileidentstr'] + '.json') }}"><span class="text-danger">DELETE</span></a></div>
+        <div class='col-1'><a href="{{ url_for('show_json', the_file=entry['fileidentstr'] + '.json') }}"><span class="text-info">->JSON</span></a></div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+<div>
+    {% endblock %}

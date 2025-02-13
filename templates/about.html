@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<title>webssg Imaginations</title>
+
+{% endblock %}
+
+{% block main %}
+
+<h1>The workflow</h1>
+<p>Below is a graphical representation of this tool's workflow. Markdown files are meant for a final copyedit, html for typesetting/layouting</p>
+<p>The different utilities can be reached from the main menu in the nav bar</p>
+<div class="mermaid">
+	flowchart LR
+	A(copyedited MS .docx) --> |pandoc script| B(markdown)
+	B --> X(pandoc template & script)
+	A --> |script| AB(json)
+	AB --> X
+	X --> Y(html)
+	Y --> |prince| Z(PDF)
+	Y --> ZA[(Wordpress)]
+	Y -.-> ZB(epub)
+	Y -.-> A2[(OJS)]
+	Z --> A1[(Érudit)]
+	Z --> A2[(OJS)]
+	Z --> ZA
+	style A color: blue
+	style B color:red
+	style X color: silver
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true });</script>
+
+{% endblock %}

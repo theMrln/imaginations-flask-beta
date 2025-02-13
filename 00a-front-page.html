@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Imaginations
+    </title>
+    <style>
+        @prince-pdf {
+            prince-pdf-page-layout: two-page-right;
+            prince-pdf-page-mode: show-bookmarks;
+        }
+
+        @page {
+            size: 7in 10in;
+            margin: 0;
+            prince-pdf-page-layout: two-page-right;
+            prince-pdf-page-mode: show-bookmarks;
+        }
+
+        html,
+        body,
+        div,
+        header,
+        p,
+        blockquote,
+        ul,
+        ol,
+        li,
+        pre {
+            margin: 0;
+            padding: 0;
+            hyphens: none;
+        }
+
+        body {
+            --the-text-color: #ffffff;
+            --the-text-color-alt: #ee4036;
+            background-color: #151515;
+
+            background-image: url(static/img/cover_img.png);
+            background-position: top 0.8in left 0.6in;
+            background-size: 5in;
+            background-repeat: no-repeat;
+        }
+
+        #contributors {
+            position: absolute;
+            left: 4.4in;
+            top: 1.8in;
+            padding-top: 0.2in;
+            padding-left: 0.3in;
+            padding-right: 0.3in;
+            padding-bottom: 0.2in;
+            color: var(--the-text-color-alt);
+            background-color: rgba(255, 255, 255, 0.9);
+            /* text-shadow: 0.5px 0.5px 0px rgba(0, 0, 0, 0.5); */
+            font-family: "Muli SemiBold", sans-serif;
+            font-size: 11pt;
+            font-weight: bolder;
+            line-height: 26pt;
+            font-style: italic;
+            text-align: right;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        #lower-third {
+            display: none;
+            position: absolute;
+            left: 0n;
+            top: 7.12in;
+            width: 7in;
+            height: 7in;
+            margin: 0;
+            background: rgba(131, 132, 139, 0.78);
+            z-index: 1;
+        }
+
+        #imaginations-logo {
+            position: absolute;
+            left: 0.6in;
+            top: 7.8in;
+            /* background-color: white; */
+            z-index: 1000;
+        }
+
+        #issue-title {
+            position: absolute;
+            left: 56px;
+            top: 8.9in;
+            font-family: "Muli ExtraBold", sans-serif;
+            /* color: #EE4037; */
+            color: var(--the-text-color);
+            font-size: 18pt;
+            line-height: 21pt;
+            font-style: italic;
+            text-align: left;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        #issue-editor {
+            position: absolute;
+            left: 56px;
+            top: 9.5in;
+            font-family: "Muli", sans-serif;
+            font-size: 12pt;
+            font-style: italic;
+            color: var(--the-text-color);
+            z-index: 3;
+        }
+
+        #issue {
+            position: absolute;
+            left: 5in;
+            top: 9.5in;
+            font-family: "Muli", sans-serif;
+            font-size: 12pt;
+            font-style: italic;
+            color: var(--the-text-color);
+            z-index: 4;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contributors" style="display:flex; justify-content: space-between;">
+        <div id="contributorlist">
+            <p>REBECCA CARLSON</p>
+            <p>DONATELLA DELLA RATTA</p>
+            <p>POLINA GOLOVÁTINA-MORA</p>
+            <p>DAN HARRIS</p>
+            <p>MARY ELIZABETH LUKA</p>
+            <p>ANNETTE N MARKHAM</p>
+            <p>MARY-ROSE MCLAREN</p>
+            <p>VERONICA MITCHELL</p>
+            <p>CORINNA PETERKEN</p>
+            <p>KIM SNEPVANGERS</p>
+            <p>ANNE SORONEN</p>
+            <p>DARKO SUVIN</p>
+            <p>KAROLIINA TALVITIE-LAMBERG</p>
+            <p>ANDY FISCHER WRIGHT</p>
+        </div>
+    </div>
+    <div id="issue-title">Massive/Micro Sensemaking</div>
+    <div id="issue-editor"> Guest Editors: Mary Elizabeth Luka, Annette N Markham, Dan Harris</div>
+    <div id="issue">Issue 12-2, 2021</div>
+    <div id="lower-third"> &nbsp; </div>
+    <div id="imaginations-logo">
+        <img src="static/img/imaginations-logo.jpg" width="560" />
+    </div>
+</body>
+
+</html>

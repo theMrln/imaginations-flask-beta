@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<title>Edit json file</title>
+
+<script>
+    // 1. remove contributor in front end
+    function removeItem(el) {
+        let result = confirm("Want to delete?");
+        if (result) {
+            el.closest('li').remove();
+            // save by sending click to save button
+            document.getElementById("saveForm").click();
+        }
+    }
+</script>
+
+{% endblock %}
+{% block main %}
+
+<h1 class="text-info"> Input form for issue {{ data['vol'] }}.{{ data['issue'] }} ({{ json_file }}) </h1>
+
+<div class="container mt-4">
+    {#
+    <button type="button" class="btn mb-1">
+        <a href="{{ url_for('update_from_ojs_id', the_id=data['ojs_id']) }}">Update issue metadatafrom OJS ID</a>
+    </button>
+    <button type="button" class="btn mb-1">
+        <a href="{{ url_for('update_article_metadata') }}">Update metadata/articles</a>
+    </button>
+#}
+    <button type="button" class="btn mb-1">
+        <a href="{{ url_for('generate_issue_cover') }}">Generate issue cover</a>
+    </button>
+    <button type="button" class="btn mb-1 data-toggle=" tooltip" data-placement="top" title="This will also generate front matter.">
+        <a href="{{ url_for('generate_front_matter') }}">Generate front matter</a>
+    </button>
+    <button type="button" class="btn mb-1 data-toggle=" tooltip" data-placement="top" title="This will also generate issue cover and front matter.">
+        <a href="{{ url_for('generate_whole_issue') }}">Generate whole issue</a>
+    </button>
+    <hr>
+    <div class="form-group">
+        {# NOTE: autosave can be added to form object #}
+        {# <form class="form" id="form" method="post" role="form" onchange="document.getElementById('saveForm').click()"> #}
+        <form class="form" id="form" method="post" role="form">
+            <input type="hidden" name="internal_id" access="false" value="{{ data['internal_id'] }}">
+            <input type="hidden" name="xml_file_name" access="false" value="{{ data['xml_file_name'] }}">
+
+            <input type="hidden" name="cover_image" access="false" value="{{ data['cover_image'] }}">
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#issue-tit-en">EN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#issue-tit-fr">FR</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="issue-tit-en" class="container tab-pane active">
+                    <label for="issue_title">ISSUE TITLE</label>
+                    <input type="text" class="form-control mb-2" name="issue_title" value="{{ data['issue_title'] }}" id="issue_title">
+                </div>
+                <div id="issue-tit-fr" class="container tab-pane fade">
+                    <label for="issue_title_fr">TITRE DU NUMERO</label>
+                    <input type="text" class="form-control mb-2" name="issue_title_fr" value="{{ data['issue_title_fr'] }}" id="issue_title_fr">
+                </div>
+            </div>
+            <hr>
+            <div class="form-row align-items-end mb-2">
+                <div class="col">
+                    <label for="vol">Volume</label>
+                    <input type="text" class="form-control" name="vol" value="{{ data['vol'] }}" id="vol">
+                </div>
+                <div class="col">
+                    <label for="issue">Issue</label>
+                    <input type="text" class="form-control" name="issue" value="{{ data['issue'] }}" id="issue">
+                </div>
+                <div class="col">
+                    <label for="year">Year</label>
+                    <input type="text" class="form-control" name="year" value="{{ data['year'] }}" id="year">
+                </div>
+                <div class="col">
+                    <label for="publication_date">Publication date</label>
+                    <input type="date" class="form-control" name="publication_date" value="{{ data['publication_date'] }}" id="publication_date">
+                </div>
+            </div>
+
+            <div class="form-row align-items-end mb-2">
+                <div class="col">
+                    <label for="doi">DOI</label>
+                    <input type="text" class="form-control" name="doi" value="{{ data['doi'] }}" id="doi">
+                </div>
+
+                <div class="col">
+
+                    <label for="ojs_id">ojs_id ID</label>
+                    <input type="text" class="form-control" name="ojs_id" value="{{ data['ojs_id'] }}" id="ojs_id">
+                </div>
+
+                <div class="col">
+                    <label for="image_credit">Image credit</label>
+                    <input type="text" class="form-control" name="image_credit" value="{{ data['image_credit'] }}" id="image_credit">
+                </div>
+            </div>
+            <hr>
+            {# issue editors:#}
+            {#   TODO: add logic for sequencing editors#}
+            <h5 class="mt-4">Editors</h5>
+            <ul style="list-style: none;">
+
+                {% if data["editors"] %}
+                {% for editor in data["editors"] %}
+                {% set the_name=data['editors'][loop.index0]["last"] + ", " + data['editors'][loop.index0]["first"] %}
+                {% set the_count= loop.index0 + 1 %}
+                {#                          {# the following are values that need to be saved back from what is passed into the form as default  #}
+                <input type="hidden" name="editor_count" access="false" value={{ the_count }}>
+
+
+                <li>
+                    <details style="background-color: #E0E4EF;">
+                        <summary>
+                            {{ the_count }}: {{ the_name }}
+                        </summary>
+                        <fieldset class="form-group p-2">
+                            <div class="form-row align-items-end">
+                                <div class="col">
+                                    <label for="first{{ loop.index0 }}">First Name</label>
+                                    <input type="text" class="form-control" name="first{{ loop.index0 }}" value="{{ data['editors'][loop.index0]['first'] }}">
+                                </div>
+                                <div class="col">
+                                    <label for="last{{ loop.index0 }}">Last Name</label>
+                                    <input type="text" class="form-control" name="last{{ loop.index0 }}" value="{{ data['editors'][loop.index0]['last'] }}">
+                                </div>
+                                <div class="col">
+                                    <button type="button" class="delAuthor btn btn-danger" onclick="removeItem(this)">
+                                        Delete Editor
+                                    </button>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </details>
+                </li>
+
+                {% endfor %}
+                {% endif %}
+            </ul>
+
+            <button type="button" name="addEditor" class="btn mb-1">
+                <a href="{{ url_for('app_json.add_editor') }}">Add Editor</a>
+            </button>
+
+            <hr>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#issue-description-en">EN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#issue-description-fr">FR</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="issue-description-en" class="container tab-pane active">
+                    <label for="description">ISSUE DESCRIPTION</label>
+                    <textarea class="form-control mb-2" name="description" id="description" rows="5">{{ data['description'] }}</textarea>
+                </div>
+                <div id="issue-description-fr" class="container tab-pane fade">
+                    <label for="description_fr">SOMMAIRE DU NUMERO</label>
+                    <textarea class="form-control mb-2" name="description_fr" id="description_fr" rows="5">{{ data['description_fr'] }}</textarea>
+                </div>
+            </div>
+            <button type="submit" value="save" class="btn mb-1" id="saveForm">SAVE</button>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+{#<script src={{ url_for("static", filename="js/edit.js") }}></script>#}
+{% endblock %}

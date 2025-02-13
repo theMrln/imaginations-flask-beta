@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<title>Edit json file</title>
+
+<script>
+    function removeItem(el) {
+        let result = confirm("Want to delete?");
+        if (result) {
+            el.closest('li').remove();
+            console.log("Author removed")
+        }
+    }
+</script>
+
+{% endblock %}
+{% block main %}
+
+<div style="background-color: #F2F3F7; margin-left: 30px;">
+    {% for message in get_flashed_messages() %}
+    <code style="text-align: left; margin-left: 1rem; color:lightblue; background-color:darkslategrey; font-size: 14pt">{{ message }}</code>
+    {% endfor %}
+</div>
+<h1 class="text-info">Article metadata</h1>
+<p>File: {{ json_file }}</p>
+{% set fileidentstr = json_file.split('.')[0] %}
+
+<div class="container">
+    <div class="container mt-4">
+
+        <hr>
+        <div class="form-group">
+            <h2 class="h2">{{ data["title"] }}</h2>
+            <form class="form" id="form" method="post" role="form">
+                <button type="submit" name="save" value="save" class="btn btn-secondary mb-5" id="saveButton">SAVE</button>
+                <fieldset class="form-group p-3" style="background-color: #F2F3F7;">
+                    <legend>ARTICLE</legend>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#art-tit-en">EN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#art-tit-fr">FR</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="art-tit-en" class="container tab-pane active">
+                            <label for="art-title">Title</label>
+                            <input type="text" class="form-control" name="title" id="title" value='{{ data["title"] }}' required><br>
+                        </div>
+                        <div id="art-tit-fr" class="container tab-pane fade">
+                            <label for="article-title-fr">Titre</label>
+                            <input type="text" class="form-control" name="title_fr" id="title_fr" value='{{ data["title_fr"] }}'><br>
+                        </div>
+                    </div>
+                    <details open>
+                        <summary>Abstract</summary>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#abstract-en">EN</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#abstract-fr">FR</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="abstract-en" class="container tab-pane active">
+                                <label for="abstract">Abstract:</label>
+                                <textarea class="form-control" name="abstract" id="abstract" rows="5">{{ data["abstract"] }}</textarea>
+                            </div>
+                            <div id="abstract-fr" class="container tab-pane fade">
+                                <label for="abstract-fr">Résumé:</label>
+                                <textarea class="form-control" name="abstract_fr" id="abstract_fr" rows="5">{{ data["abstract_fr"] }}</textarea>
+                            </div>
+                        </div>
+                    </details>
+                    {#short title and short authors#}
+                    <div class="form-row pt-4">
+                        <div class="form-group col-md-6">
+                            <label for="short-title">short title for header</label>
+                            <input type="text" class="form-control" name="short_title" id="short_title" value='{{ data["short_title"] }}'>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="short-author">short author for header</label>
+                            <input type="text" class="form-control" name="short_author" id="short_author" value='{{ data["short_author"] }}'>
+                        </div>
+                    </div>
+                    {# authors #}
+                    {#   TODO: add logic for sequencing authors, maybe drag&drop javascript for lsit#}
+                    <ul class="list-group" style="list-style: none;">
+                        {% if data["contributors"] %}
+                        {# loop over contributors, add a section and CHANGE IDs according to loop.index0 #}
+                        {% for contributor in data["contributors"] %}
+                        <li>
+                            <fieldset class="form-group p-2" style="background-color: #B4C9DD;">
+                                <details id="authorDetails">
+                                    <summary class="h4">
+                                        {{ data["contributors"][loop.index0]["last"] }}, {{ data["contributors"][loop.index0]["first"] }}
+                                    </summary>
+
+                                    <div class='form-row align-items-end'>
+                                        <div class='col col-1'>
+                                            <label for="sequence{{ loop.index0 }}">Seq</label>
+                                            <input type="text" class="form-control sequence" name="sequence{{ loop.index0 }}" {% set count=data["contributors"][loop.index0]["sequence"] %} value='{{ data["contributors"][loop.index0]["sequence"] }}'>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="first{{ loop.index0 }}">First Name</label>
+                                            <input type="text" class="form-control first" name="first{{ loop.index0 }}" id="first{{ loop.index0 }}" value='{{ data["contributors"][loop.index0]["first"] }}'>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="middle{{ loop.index0 }}">Middle Name</label>
+                                            <input type="text" class="form-control middle" name="middle{{ loop.index0 }}" value='{{ data["contributors"][loop.index0]["middle"] }}'>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="last{{ loop.index0 }}">Last Name</label>
+                                            <input type="text" class="form-control last" name="last{{ loop.index0 }}" {% set count=data["contributors"][loop.index0]["last"] %} value='{{ data["contributors"][loop.index0]["last"] }}'>
+                                        </div>
+                                        <div class='col'>
+                                            <button type='button' class='delAuthor btn btn-danger' onclick='removeItem(this)'>Delete
+                                                author
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                    <div class='form-row pt-2 align-items-end'>
+                                        <div class='col'>
+                                            <label for="affiliation{{ loop.index0 }}">Affiliation</label>
+                                            <input type="text" class="form-control affiliation" name="affiliation{{ loop.index0 }}" value='{{ data["contributors"][loop.index0]["affiliation"] }}'>
+                                        </div>
+                                        <div class='col'>
+                                            <label for="email{{ loop.index0 }}">Email</label>
+                                            <input type="email" class="form-control email" name="email{{ loop.index0 }}" value='{{ data["contributors"][loop.index0]["email"] }}'>
+                                        </div>
+                                        <div class='col'>
+                                            <label for="orcid{{ loop.index0 }}">ORCID</label>
+                                            <input type="text" class="form-control orcid" name="orcid{{ loop.index0 }}" value='{{ data["contributors"][loop.index0]["orcid"] }}'>
+                                        </div>
+                                    </div>
+
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#bio{{ loop.index0 }}">EN</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#bio_fr{{ loop.index0 }}">FR</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="bio{{ loop.index0 }}" class="container tab-pane active">
+                                            <label for="bio-en{{ loop.index0 }}">Author bio:</label><br>
+                                            <textarea class="form-control bio" name="bio{{ loop.index0 }}" id="bio{{ loop.index0 }}" rows="5">{{ data["contributors"][loop.index0]["bio"] }}</textarea><br>
+                                        </div>
+                                        <div id="bio_fr{{ loop.index0 }}" class="container tab-pane fade">
+                                            <label for="author-bio">Auteur bio:</label><br>
+                                            <textarea class="form-control bio_fr" name="bio_fr{{ loop.index0 }}" id="bio_fr{{ loop.index0 }}" rows="5">{{ data["contributors"][loop.index0]["bio_fr"] }}</textarea><br>
+                                        </div>
+                                    </div>
+                                    <label for="delete{{ loop.index0 }}"></label>
+
+                                </details>
+                            </fieldset>
+                        </li> {% endfor %} {% endif %}
+                    </ul>
+                    <button type="button" name="addAuthor" id="addContributor" class="btn mb-2">
+                        <a href="{{ url_for('app_json.add_contributor', json_file=json_file.split("/")[-1] ) }}">Add
+                            Author</a>
+                    </button>
+                    <hr>
+
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#keywords-en">EN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#keywords-fr">FR</a>
+                        </li>
+                    </ul>
+                    <label for="keywords">Keywords (separate with semicolon)</label>
+                    <div class="tab-content">
+                        <div id="keywords-en" class="container tab-pane active">
+                            <input type="text" class="form-control" name="keywords" id="keywords" placeholder="keywords" value='{{ data["keywords"] }}'><br>
+                        </div>
+                        <div id="keywords-fr" class="container tab-pane fade">
+                            <input type="text" class="form-control" name="keywords_fr" id="keywords_fr" placeholder="keywords" value='{{ data["keywords_fr"] }}'><br>
+                        </div>
+                    </div>
+                    <div class="form-row pt-1">
+                        <div class="form-group col-md-2">
+                            <label for="pages">pp</label>
+                            <input type="text" class="form-control" name="pages" id="pages" value='{{ data["pages"] }}'>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="start-page">start</label>
+                            <input type="text" class="form-control" name="start_page" id="first_page" value='{{ data["start_page"] }}'>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="number-in-issue">#</label>
+                            <input type="text" class="form-control" name="number_in_issue" id="number_in_issue" value='{{ data["number_in_issue"] }}'>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="doi">DOI</label>
+                            <input type="text" name="doi" class="form-control" id="doi" value='{{ data["doi"] }}'>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="fileidentstr">IDENT</label>
+                            <input type="text" name="fileidentstr" class="form-control" id="fileidentstr" value='{{ fileidentstr }}' readonly="readonly">
+                        </div>
+
+
+                        <div class="form-group col-md-1">
+                            <label for="ojs_id">OJS ID</label>
+                            <input type="text" name="ojs_id" class="form-control" id="ojs_id" value='{{ data["ojs_id"] }}' readonly="readonly">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="ojs_id">Submission ID</label>
+                            <input type="text" name="submission_id" class="form-control" id="submission_id" value='{{ data["submission_id"] }}'>
+                        </div>
+                    </div>
+
+                </fieldset>
+                </details>
+
+
+                <button type="submit" name="save" value="save" class="btn btn-secondary mb-5" id="saveButton">SAVE</button>
+
+            </form>
+            <!-- ! only for js testing purposes: -->
+            <p id="log"></p>
+        </div>
+    </div>
+
+
+    {% endblock %}
+
+    {% block script %}
+    {#<script src={{ url_for("static", filename="js/edit.js") }}></script>#}
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const inputArray = document.getElementsByTagName("input");
+            const textareaArray = document.getElementsByTagName("textarea");
+            const authorDetails = document.querySelector("#authorDetails");
+            const btnSave = document.querySelector('#saveButton');
+
+            for (var index = 0; index < inputArray.length; index++) {
+                inputArray[index].addEventListener('change', () => {
+                    btnSave.click();
+                });
+            }
+
+            for (var index = 0; index < textareaArray.length; index++) {
+                textareaArray[index].addEventListener('change', () => {
+                    btnSave.click();
+                });
+            }
+
+            authorDetails.addEventListener('toggle', () => {
+                btnSave.click();
+            });
+        });
+
+        function updateValue(e) {
+            const btnSave = document.querySelector('#saveButton');
+            console.log("save button clicked");
+            // log.textContent = e.target.value;
+            // save after focus change
+            // btnSave.click()
+            // the reload triggered by the save button is quite annoying, should be limited?
+        }
+    </script>
+    {% endblock %}

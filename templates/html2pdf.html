@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<title>Convert markdown to html</title>
+
+{% endblock %}
+
+{% block main %}
+<h1 class="text-primary">Document conversion utilities</h1>
+<p>Convert files in the following order:
+<ol>
+    <li>docx-->markdown;</li>
+    <li>markdown-->html;</li>
+    <li>html-->PDF</li>
+</ol>
+</p>
+<p>Please note that you need to delete already existing conversions before converting the same file again.</p>
+<hr>
+
+<details open>
+    <summary class="h2">Convert html to PDF</summary>
+    <div class="row">
+        <div class="col-6 bg-light">
+            <h5 class="mb-1">html files</h5>
+            {% if the_passed_html_list %}
+            {% for entry in the_passed_html_list %}
+            <div class="row">
+                <div class='col-8'><span class="text-info">{{ entry }}</span></div>
+                <div class='col-auto'><span class="text-danger"><a href="/convert2pdf/{{ entry }}">CONVERT</a></span></div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-6">
+            <h5 class="mb-2">pdf files</h5>
+            {% if the_passed_pdf_list %}
+            {% for entry in the_passed_pdf_list %}
+            <div class='row bg-white'>
+                <div class="col-8"><a href="{{ url_for('static', filename = 'PDF/' + entry) }}">{{ entry }}</a></div>
+                <div class='col-auto'><a href="{{ url_for('delete', the_file=entry) }}"><span class=" text-danger">DELETE</span></a></div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</details>
+{% endblock %}
